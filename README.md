@@ -22,10 +22,6 @@ An AI-powered Traffic Violation Detection System that automatically detects traf
 - OpenCV
 - YOLO
 - NumPy
-- EasyOCR / Tesseract OCR
-- TensorFlow / PyTorch (if applicable)
-- Flask (if web application)
-- SQLite / MySQL (if database used)
 
 ---
 
