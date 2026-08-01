@@ -9,7 +9,6 @@ An AI-powered Traffic Violation Detection System that automatically detects traf
 - Vehicle Detection
 - Traffic Signal Detection
 - Red Light Violation Detection
-- Lane Violation Detection
 - License Plate Detection
 - Number Plate Recognition (OCR)
 - Store Violation Records
