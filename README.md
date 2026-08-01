@@ -1,23 +1,23 @@
-# 🚦 Traffic Violation Detection System
+# Traffic Violation Detection System
 
-An AI-powered Traffic Violation Detection System that automatically detects traffic rule violations from images or videos using Computer Vision and Deep Learning techniques. The system identifies vehicles, detects violations, extracts license plate numbers, and stores the results for further processing.
+An AI-powered Traffic Violation Detection System that automatically detects traffic rule violations from images or videos using Computer Vision and Deep Learning techniques The system identifies vehicles detects violations extracts license plate numbers and stores the results for further processing
 
 ---
 
 ## 📌 Features
 
-- 🚗 Vehicle Detection
-- 🚦 Traffic Signal Detection
-- ❌ Red Light Violation Detection
-- 🛣️ Lane Violation Detection
-- 🔍 License Plate Detection
-- 📝 Number Plate Recognition (OCR)
-- 💾 Store Violation Records
-- 📊 Real-time Video Processing
+- Vehicle Detection
+- Traffic Signal Detection
+- Red Light Violation Detection
+- Lane Violation Detection
+- License Plate Detection
+- Number Plate Recognition (OCR)
+- Store Violation Records
+- Real-time Video Processing
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Python
 - OpenCV
@@ -35,20 +35,17 @@ An AI-powered Traffic Violation Detection System that automatically detects traf
 ```
 trafficViolationDetection/
 │
-├── models/                 # Trained Models
-├── dataset/                # Dataset
-├── outputs/                # Detection Results
-├── images/                 # Sample Images
-├── videos/                 # Input Videos
-├── utils/                  # Utility Functions
-├── main.py                 # Main Program
+├── modules/               
+├── violationReport/        
+├── images/                
+├── videos/               
+├── main.py              
 ├── requirements.txt
 └── README.md
-```
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 ### 1. Clone Repository
 
@@ -85,7 +82,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Run the Project
+## Run the Project
 
 ```bash
 python main.py
@@ -105,7 +102,7 @@ python main.py --source videos/test.mp4
 
 ---
 
-## 📊 Output
+## Output
 
 The system will:
 
@@ -118,7 +115,7 @@ The system will:
 
 ---
 
-## 📸 Sample Output
+## Sample Output
 
 Add screenshots here.
 
@@ -140,7 +137,7 @@ Result Saved
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 Example packages:
 
@@ -163,19 +160,18 @@ pip install -r requirements.txt
 
 ---
 
-## 🎯 Future Improvements
+## Future Improvements
 
 - Helmet Detection
-- Seat Belt Detection
 - Speed Estimation
-- Wrong Lane Detection
-- Automatic Fine Generation
+- Wrong Way Detection
+- 
 - Web Dashboard
-- Live CCTV Integration
+- Live CCTV Or Video/photoges Integration
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome.
 
@@ -208,7 +204,7 @@ This project is licensed under the MIT License.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Nouman**
 
@@ -216,7 +212,7 @@ GitHub: https://github.com/noumi553
 
 ---
 
-## ⭐ Support
+## Support
 
-If you found this project helpful, please give it a ⭐ on GitHub.
+If you found this project helpful, please give it a on GitHub.
 # trafficViolationDetection
