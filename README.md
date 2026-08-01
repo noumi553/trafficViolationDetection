@@ -1,6 +1,6 @@
 # Traffic Violation Detection System
 
-An AI-powered Traffic Violation Detection System that automatically detects traffic rule violations from images or videos using Computer Vision and Deep Learning techniques The system identifies vehicles detects violations extracts license plate numbers and stores the results for further processing
+An AI-powered Traffic Violation Detection System that automatically detects traffic rule violations from images or videos using Computer Vision and Deep Learning techniques The system identifies vehicles detects violations and license plate numbers detection and stores the results as a image in violationReport folder
 
 ---
 
