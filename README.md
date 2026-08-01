@@ -156,13 +156,10 @@ pip install -r requirements.txt
 ---
 
 ## Future Improvements
-
-- Helmet Detection
-- Speed Estimation
-- Wrong Way Detection
-- 
+- Improving a data set
 - Web Dashboard
-- Live CCTV Or Video/photoges Integration
+- Extracting data or text from number plate 
+- Live CCTV Integration
 
 ---
 
