@@ -1,9 +1,8 @@
-
+import os
 import cv2
 from ultralytics import YOLO
-import os
 
-os.makedirs("violations", exist_ok=True)
+os.makedirs("violationsReport", exist_ok=True)
 
 class SpeedDetector:
     def __init__(self, line1_y=180, line2_y=280, distance=10,
@@ -25,7 +24,7 @@ class SpeedDetector:
             self.fps = 30
 
         self.frame_no += 1
-        results = self.model.track(frame, persist=True, verbose=False)
+        results = self.model.track(frame, persist=True, verbose=False, imgsz=320, conf=0.4, iou=0.5)
 
         cv2.line(frame,(0,self.line1_y),(frame.shape[1],self.line1_y),(0,0,255),2)
         cv2.line(frame,(0,self.line2_y),(frame.shape[1],self.line2_y),(255,0,0),2)
@@ -48,16 +47,16 @@ class SpeedDetector:
 
             if tid not in self.vehicle_data:
                 self.vehicle_data[tid]={
-                                    "prev_y":cy,
-                                    "start_frame":None,
-                                    "speed":None,
-                                    "cross1":False,
-                                    "cross2":False,
-                                    "direction":None
+                                    "prev_y":cy, 
+                                    "start_frame":None, 
+                                    "speed":None, 
+                                    "cross1":False, 
+                                    "cross2":False, 
+                                    "direction":None 
                                 }
 
-            d=self.vehicle_data[tid]
-            prev=d["prev_y"]
+            d=self.vehicle_data[tid] 
+            prev=d["prev_y"] 
 
             if (not d["cross1"]) and prev < self.line1_y <= cy:
                 d["cross1"] = True
@@ -71,9 +70,7 @@ class SpeedDetector:
                 and prev < self.line2_y <= cy
             ):
                 d["cross2"] = True
-
                 frames = self.frame_no - d["start_frame"]
-
                 if frames > 0:
                     sec = frames / self.fps
                     d["speed"] = (self.distance / sec) * 3.6
@@ -95,9 +92,7 @@ class SpeedDetector:
                 and prev > self.line1_y >= cy
             ):
                 d["cross1"] = True
-
                 frames = self.frame_no - d["start_frame"]
-
                 if frames > 0:
                     sec = frames / self.fps
                     d["speed"] = (self.distance / sec) * 3.6
@@ -106,7 +101,6 @@ class SpeedDetector:
                 d["cross2"] = False
                 d["direction"] = None
                 d["start_frame"] = None
-
 
             d["prev_y"]=cy
 
@@ -131,26 +125,7 @@ class SpeedDetector:
             cv2.putText(frame,label,(x1,y1-10),
                         cv2.FONT_HERSHEY_SIMPLEX,0.6,color,2)
             
-
         cv2.putText(frame,f"Violators: {len(self.violators)}",
                     (10,30),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
         return frame
 
-class SpeedDetectorMain:
-    def main():
-            cap=cv2.VideoCapture("videoPhotages/st.mp4")
-            detector=SpeedDetector()
-
-            detector.fps=cap.get(cv2.CAP_PROP_FPS) or 30
-            while True:
-                ret,frame=cap.read()
-                if not ret:
-                    break
-                frame=cv2.resize(frame,(900,500))
-                out=detector.process(frame)
-                cv2.imshow("Professional Speed Detection",out)
-                if cv2.waitKey(1)&0xFF==ord("q"):
-                    break
-
-            cap.release()
-            cv2.destroyAllWindows()
