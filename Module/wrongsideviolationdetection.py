@@ -4,8 +4,6 @@ import cv2
 # Tracking variables
 violator = set()
 car_positions = {}
-up_counter = {}
-down_counter = {}
 
 area = [(891, 236), (322, 427)]
 point = [(861, 167), (792, 192)]
@@ -31,13 +29,13 @@ def process_wrong_way_frame(frame, model):
         ids = results[0].boxes.id.cpu().numpy().astype(int)
         classes = results[0].boxes.cls.cpu().numpy().astype(int)
         
-        for box, track_id, cls in zip(boxes, ids, classes):
-            label = model.names[cls]
+        for box, track_id, cls_id in zip(boxes, ids, classes):
+            label = model.names[cls_id]
             if label not in ["car", "truck", "bus", "motorcycle"]:
                 continue
                 
             x1, y1, x2, y2 = map(int, box)
-            cx, cy = (x1 + x2) // 2, y2
+            cx, cy = (x1 + x2) // 2, y1  # Top point (circle box ke upar banega)
             
             cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)
             distance = point_line_distance(cx, cy, area[0], area[1])
@@ -46,31 +44,14 @@ def process_wrong_way_frame(frame, model):
             
             if track_id not in car_positions:
                 car_positions[track_id] = (cx, cy)
-                up_counter[track_id] = 0
-                down_counter[track_id] = 0
             else:
                 prev_x, prev_y = car_positions[track_id]
-                dy = cy - prev_y
+                dy = cy - prev_y  # Agar negative hai matlab gadi upar ja rahi hai
                 
-                # Up movement
-                if dy < -3:
-                    up_counter[track_id] += 1
-                else:
-                    up_counter[track_id] = 0
-
-                # Down movement
-                if dy > 3:
-                    down_counter[track_id] += 1
-                else:
-                    down_counter[track_id] = 0
-
-                # --- IMPORTANT CHANGE ---
-                # Yahan sirf us direction ko violation banayein jo wrong way hai.
-                # Misal ke tor par, agar sirf UP (Bottom to Top) jana wrong way hai, to sirf up_counter rakhein:
-                if up_counter[track_id] >= 5 and distance <= 8 and track_id not in violator:
+                # Distance threshold ko 20 rakha hai aur upar jane wali movement par violation count hogi
+                if distance <= 20 and dy < 0 and track_id not in violator:
                     violator.add(track_id)
-                
-                # (Agar ulta hai ke DOWN wrong way hai, to up_counter ki jagah down_counter[track_id] >= 5 likh dein)
+                    print(f"WRONG WAY VIOLATION: ID {track_id}")
 
             car_positions[track_id] = (cx, cy)
             
