@@ -128,4 +128,3 @@ class SpeedDetector:
         cv2.putText(frame,f"Violators: {len(self.violators)}",
                     (10,30),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
         return frame
-
