@@ -14,6 +14,8 @@ def helmet_detection(frame):
     global violation_active
     results = helmet_model(frame, conf=0.5)
     no_helmet_detected = False
+    objtwo = licensePlateDetector
+    frame = objtwo.license_plate_detection(frame)
 
     for r in results:
         for box in r.boxes:
